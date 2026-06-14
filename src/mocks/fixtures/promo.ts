@@ -1,0 +1,14 @@
+/**
+ * OpenUI Lang fixture for promotion planning scenarios.
+ * Query: "Plan the Black Friday promo for skincare" / promo & discount & cannibalization
+ * Proves OpenUI generalizes beyond media reallocation to trade-promo planning.
+ * Components exercised: LsInfoPanel, LsKpiRow, LsDataTable, LsChart,
+ *                       LsActionInaction, LsSuggestionChips
+ */
+export const PROMO_FIXTURE = `root = LsStack("vertical", "md", [header, kpis, options, upliftChart, decision, chips])
+header = LsInfoPanel("info", "Four Black Friday promo depths were modeled for the NovaBrand skincare line. Incremental volume, ROI, and cannibalization (units that would have sold at full price) were estimated from 3 prior promo cycles. The 25% bundle leads on incremental ROI while keeping cannibalization in check.", "Black Friday Promo Planner — Skincare Line")
+kpis = LsKpiRow([{label: "Recommended Depth", value: "25% bundle"}, {label: "Incremental Units", value: "+86K", delta: 0.21}, {label: "Promo ROI", value: "3.2x", delta: 0.18}, {label: "Cannibalization", value: "22%", delta: -0.04, positive_direction: false}, {label: "Net Margin Lift", value: "+$640K", delta: 0.11}, {label: "New Customers", value: "+14.3K", delta: 0.27}])
+options = LsDataTable(["Promo Option", "Incr. Units", "Cannibalization", "Promo ROI", "Net Margin Lift"], [["10% off sitewide", "+31K", "14%", "2.4x", "+$280K"], ["20% off skincare", "+62K", "19%", "2.9x", "+$510K"], ["25% bundle (2+ items) — recommended", "+86K", "22%", "3.2x", "+$640K"], ["BOGO 50% off", "+118K", "41%", "1.9x", "+$370K"]], "Modeled on 3 prior promo cycles · Cannibalization = share of promo units that would have sold at full price")
+upliftChart = LsChart("bar", [{name: "10% off", value: 280, value2: 14}, {name: "20% off", value: 510, value2: 19}, {name: "25% bundle", value: 640, value2: 22}, {name: "BOGO 50%", value: 370, value2: 41}], "Net margin lift ($K) vs cannibalization (%) by promo option", "Cannibalization (%)")
+decision = LsActionInaction("Run the 25% bundle promo (2+ items)", "Launch the 2+ item 25% bundle for the 5-day Black Friday window. Highest incremental ROI (3.2x) with cannibalization held at 22%, and it drives the strongest new-customer acquisition by encouraging multi-item baskets.", [{label: "Incremental Revenue", value: "+$2.4M"}, {label: "Net Margin Lift", value: "+$640K"}, {label: "New Customers", value: "+14.3K"}], "Skip the promo this cycle", "Sitting out Black Friday cedes share to competitors discounting 20–30% and forfeits the highest-traffic acquisition window of the year.", [{label: "Forgone Incremental Revenue", value: "$2.4M"}, {label: "Est. Share Loss", value: "1.8 pts"}, {label: "Missed New Customers", value: "14.3K"}])
+chips = LsSuggestionChips(["Model BOGO with a spend threshold", "Show promo ROI by channel", "Estimate post-promo demand dip", "Compare to last year's Black Friday"])`

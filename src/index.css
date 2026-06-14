@@ -1,0 +1,406 @@
+@import "@fontsource-variable/inter";
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/*
+ * Lifesight 4.0 design tokens — ported from ls4x-main/frontend/app/globals.css
+ * (read-only design reference). The OpenUI POC runs Vite + Tailwind v4, so the
+ * Next.js-only `@import "shadcn/tailwind.css"` is replaced by the inlined
+ * `@layer base` block below (that package does not ship tailwind.css here).
+ *
+ * Dark-first: :root mirrors the dark palette so anything rendered before the
+ * next-themes ThemeProvider hydrates already looks correct. The .light block
+ * keeps the `d` hotkey theme toggle from breaking.
+ */
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+    /* Typography — Inter is the sole permitted typeface (Design.md §1.2) */
+    --font-sans: "Inter Variable", "InterVariable", "Inter", system-ui, -apple-system, sans-serif;
+    /* Shadcn-compatible base palette (dark theme by default) */
+    --background: #000000;
+    --foreground: #ebebeb;
+    --card: #0f0f10;
+    --card-foreground: #ebebeb;
+    --popover: #0f0f10;
+    --popover-foreground: #ebebeb;
+    --primary: #027b8e;
+    --primary-foreground: #ffffff;
+    --secondary: #0f0f10;
+    --secondary-foreground: #ebebeb;
+    --muted: #0f0f10;
+    --muted-foreground: #818181;
+    --accent: #1f1f21;
+    --accent-foreground: #ebebeb;
+    --destructive: #fb2c36;
+    --border: #1f1f21;
+    --input: #0f0f10;
+    --ring: #027b8e;
+    --chart-1: #00bc7d;
+    --chart-2: #2dd4bf;
+    --chart-3: #2b7fff;
+    --chart-4: #a78bfa;
+    --chart-5: #fbbf24;
+    --radius: 0.5rem;
+    --sidebar: #000000;
+    --sidebar-foreground: #818181;
+    --sidebar-primary: #027b8e;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #222222;
+    --sidebar-accent-foreground: #ebebeb;
+    --sidebar-border: #1f1f21;
+    --sidebar-ring: #027b8e;
+
+    /* Lifesight-specific extensions (Design.md §1.1) */
+    --surface-dark: #0a0a0f;
+    --subtle-border: rgba(255, 255, 255, 0.04);
+    --row-highlight: #101828;
+    --text-secondary: #b3b3b3;
+    --text-dimmed: #6a7282;
+    --text-muted-desc: #99a1af;
+    --text-light-heading: #e5e7eb;
+    --primary-cta-dark: #024f5b;
+    --link-blue: #2563eb;
+
+    /* Semantic colors */
+    --positive: #12b76a;
+    --positive-alt: #00bc7d;
+    --positive-light: #4ade80;
+    --negative: #ff6467;
+    --warning: #fbbf24;
+
+    /* Tag colors */
+    --tag-high-bg: #712727;
+    --tag-high-text: #feecec;
+    --tag-high-card-bg: #fed8d8;
+    --tag-high-card-text: #712727;
+    --tag-high-green-bg: #ddfcd8;
+    --tag-high-green-text: #2a5822;
+    --tag-medium-bg: #743b1b;
+    --tag-medium-text: #fff1e9;
+    --tag-medium-card-bg: #ffe3d3;
+    --tag-medium-card-text: #743b1b;
+    --tag-low-bg: #fef3c7;
+    --tag-low-text: #92400e;
+    --tag-opportunity-bg: #d0f8e9;
+    --tag-opportunity-text: #166747;
+
+    /* Recommendation card icon backgrounds */
+    --rec-icon-green: #2d6a4f;
+    --rec-icon-orange: #c2410c;
+    --rec-icon-blue: #2563eb;
+}
+
+.dark {
+    --background: #000000;
+    --foreground: #ebebeb;
+    --card: #0f0f10;
+    --card-foreground: #ebebeb;
+    --popover: #0f0f10;
+    --popover-foreground: #ebebeb;
+    --primary: #027b8e;
+    --primary-foreground: #ffffff;
+    --secondary: #0f0f10;
+    --secondary-foreground: #ebebeb;
+    --muted: #0f0f10;
+    --muted-foreground: #818181;
+    --accent: #1f1f21;
+    --accent-foreground: #ebebeb;
+    --destructive: #fb2c36;
+    --border: #1f1f21;
+    --input: #0f0f10;
+    --ring: #027b8e;
+    --chart-1: #00bc7d;
+    --chart-2: #2dd4bf;
+    --chart-3: #2b7fff;
+    --chart-4: #a78bfa;
+    --chart-5: #fbbf24;
+    --sidebar: #000000;
+    --sidebar-foreground: #818181;
+    --sidebar-primary: #027b8e;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #222222;
+    --sidebar-accent-foreground: #ebebeb;
+    --sidebar-border: #1f1f21;
+    --sidebar-ring: #027b8e;
+}
+
+.light {
+    --background: #ffffff;
+    --foreground: #0a0a0a;
+    --card: #f9f9f9;
+    --card-foreground: #0a0a0a;
+    --popover: #ffffff;
+    --popover-foreground: #0a0a0a;
+    --primary: #111a27;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0a0a0a;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #f1f5f9;
+    --accent-foreground: #0a0a0a;
+    --destructive: #dc2626;
+    --border: #e2e8f0;
+    --input: #f1f5f9;
+    --ring: #111a27;
+    --chart-1: #00bc7d;
+    --chart-2: #2dd4bf;
+    --chart-3: #2b7fff;
+    --chart-4: #a78bfa;
+    --chart-5: #fbbf24;
+    --sidebar: #f8fafc;
+    --sidebar-foreground: #475569;
+    --sidebar-primary: #111a27;
+    --sidebar-primary-foreground: #ffffff;
+    --sidebar-accent: #e2e8f0;
+    --sidebar-accent-foreground: #0a0a0a;
+    --sidebar-border: #e2e8f0;
+    --sidebar-ring: #111a27;
+
+    --surface-dark: #f1f5f9;
+    --subtle-border: rgba(0, 0, 0, 0.06);
+    --row-highlight: #eff6ff;
+    --text-secondary: #475569;
+    --text-dimmed: #94a3b8;
+    --text-muted-desc: #64748b;
+    --text-light-heading: #1e293b;
+    --primary-cta-dark: #024f5b;
+    --link-blue: #2563eb;
+
+    --positive: #16a34a;
+    --positive-alt: #00bc7d;
+    --positive-light: #4ade80;
+    --negative: #dc2626;
+    --warning: #d97706;
+
+    --tag-high-bg: #fee2e2;
+    --tag-high-text: #991b1b;
+    --tag-high-card-bg: #fee2e2;
+    --tag-high-card-text: #991b1b;
+    --tag-high-green-bg: #dcfce7;
+    --tag-high-green-text: #166534;
+    --tag-medium-bg: #ffedd5;
+    --tag-medium-text: #9a3412;
+    --tag-medium-card-bg: #ffedd5;
+    --tag-medium-card-text: #9a3412;
+    --tag-low-bg: #fef9c3;
+    --tag-low-text: #854d0e;
+    --tag-opportunity-bg: #d1fae5;
+    --tag-opportunity-text: #065f46;
+
+    --rec-icon-green: #16a34a;
+    --rec-icon-orange: #ea580c;
+    --rec-icon-blue: #2563eb;
+}
+
+@theme inline {
+    --font-mono: var(--font-mono);
+    --font-sans: var(--font-sans);
+    --font-heading: var(--font-heading);
+
+    /* Shadcn token wiring */
+    --color-sidebar-ring: var(--sidebar-ring);
+    --color-sidebar-border: var(--sidebar-border);
+    --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+    --color-sidebar-accent: var(--sidebar-accent);
+    --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+    --color-sidebar-primary: var(--sidebar-primary);
+    --color-sidebar-foreground: var(--sidebar-foreground);
+    --color-sidebar: var(--sidebar);
+    --color-chart-5: var(--chart-5);
+    --color-chart-4: var(--chart-4);
+    --color-chart-3: var(--chart-3);
+    --color-chart-2: var(--chart-2);
+    --color-chart-1: var(--chart-1);
+    --color-ring: var(--ring);
+    --color-input: var(--input);
+    --color-border: var(--border);
+    --color-destructive: var(--destructive);
+    --color-accent-foreground: var(--accent-foreground);
+    --color-accent: var(--accent);
+    --color-muted-foreground: var(--muted-foreground);
+    --color-muted: var(--muted);
+    --color-secondary-foreground: var(--secondary-foreground);
+    --color-secondary: var(--secondary);
+    --color-primary-foreground: var(--primary-foreground);
+    --color-primary: var(--primary);
+    --color-popover-foreground: var(--popover-foreground);
+    --color-popover: var(--popover);
+    --color-card-foreground: var(--card-foreground);
+    --color-card: var(--card);
+    --color-foreground: var(--foreground);
+    --color-background: var(--background);
+
+    /* Lifesight extensions exposed as Tailwind utilities */
+    --color-surface-dark: var(--surface-dark);
+    --color-subtle-border: var(--subtle-border);
+    --color-row-highlight: var(--row-highlight);
+    --color-text-secondary: var(--text-secondary);
+    --color-text-dimmed: var(--text-dimmed);
+    --color-text-muted-desc: var(--text-muted-desc);
+    --color-text-light-heading: var(--text-light-heading);
+    --color-positive: var(--positive);
+    --color-positive-alt: var(--positive-alt);
+    --color-positive-light: var(--positive-light);
+    --color-negative: var(--negative);
+    --color-warning: var(--warning);
+    --color-link-blue: var(--link-blue);
+    --color-rec-icon-green: var(--rec-icon-green);
+    --color-rec-icon-orange: var(--rec-icon-orange);
+    --color-rec-icon-blue: var(--rec-icon-blue);
+
+    /* Radii — Design.md §1.3 (6px / 8px / 12px / 14px) */
+    --radius-sm: calc(var(--radius) * 0.75);
+    --radius-md: var(--radius);
+    --radius-lg: calc(var(--radius) * 1.5);
+    --radius-xl: calc(var(--radius) * 1.75);
+    --radius-2xl: calc(var(--radius) * 2);
+    --radius-3xl: calc(var(--radius) * 2.5);
+    --radius-4xl: calc(var(--radius) * 3);
+}
+
+/* Base layer — replicates the critical resets shadcn/tailwind.css would supply */
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  *:focus-visible {
+    @apply outline-2 outline-offset-2 outline-ring;
+  }
+  body {
+    @apply bg-background text-foreground;
+    color-scheme: dark;
+  }
+  .light body {
+    color-scheme: light;
+  }
+  html {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  *, *::before, *::after {
+    font-family: inherit;
+  }
+}
+
+/* Form controls — consistent borders + 28px height (Design.md §10.0) */
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+textarea,
+select,
+[data-slot="select-trigger"],
+[data-slot="input"],
+[data-slot="textarea"] {
+  border-color: var(--border);
+  border-radius: var(--radius-sm);
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]),
+select,
+[data-slot="select-trigger"],
+[data-slot="input"] {
+  height: 28px;
+  min-height: 28px;
+  box-sizing: border-box;
+}
+
+input:not([type="checkbox"]):not([type="radio"]):not([type="file"]):not([type="range"]):focus-visible,
+textarea:focus-visible,
+select:focus-visible,
+[data-slot="select-trigger"]:focus-visible,
+[data-slot="input"]:focus-visible,
+[data-slot="textarea"]:focus-visible {
+  border-color: var(--ring);
+}
+
+input[aria-invalid="true"],
+textarea[aria-invalid="true"],
+[data-slot="select-trigger"][aria-invalid="true"] {
+  border-color: var(--destructive);
+}
+
+/* Section headers — uppercase, 10px Bold, dimmed (Design.md §15) */
+.section-uppercase {
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 15px;
+  letter-spacing: 1.1172px;
+  color: var(--text-dimmed);
+  text-transform: uppercase;
+}
+
+.section-label {
+  font-size: 10px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--muted-foreground);
+}
+
+/* Tag variants (Design.md §8) */
+.tag-high          { background: var(--tag-high-bg);          color: var(--tag-high-text);          }
+.tag-high-card     { background: var(--tag-high-card-bg);     color: var(--tag-high-card-text);     }
+.tag-high-green    { background: var(--tag-high-green-bg);    color: var(--tag-high-green-text);    }
+.tag-medium        { background: var(--tag-medium-bg);        color: var(--tag-medium-text);        }
+.tag-medium-card   { background: var(--tag-medium-card-bg);   color: var(--tag-medium-card-text);   }
+.tag-low           { background: var(--tag-low-bg);           color: var(--tag-low-text);           }
+.tag-opportunity   { background: var(--tag-opportunity-bg);   color: var(--tag-opportunity-text);   }
+
+/* Subtle scrollbar for panels */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.12) transparent;
+}
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-track {
+  background: transparent;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.12);
+  border-radius: 4px;
+}
+.thin-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.card-hover {
+  transition: background-color 150ms ease;
+}
+.card-hover:hover {
+  background-color: color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.meta-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.375rem;
+  font-size: 10px;
+  color: var(--muted-foreground);
+  background: color-mix(in srgb, var(--muted) 50%, transparent);
+  border-radius: 0.25rem;
+  padding: 0.125rem 0.375rem;
+}
+
+/* Tabular figures for numeric table cells */
+th[data-slot="table-head"],
+td[data-slot="table-cell"] {
+  font-variant-numeric: tabular-nums;
+}
+th[data-slot="table-head"] {
+  text-align: left;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
